@@ -3,7 +3,7 @@ var fs = require("fs");
 var Promise = require('bluebird');
 var parse = require('parse-link-header');
 
-var token = "token " + "YOUR TOKEN";
+var token = "token " + "8d431c72417c7640f7ef8029e0920e5dc16ac89f";
 
 var unityId = "cjparnin";
 
@@ -13,7 +13,7 @@ function getYourRepos(userName)
 {
 
 	var options = {
-		url: 'https://github.ncsu.edu/api/v3/users/' + userName + "/repos",
+		url: 'https://github.ncsu.edu/api/v3/users/' + "cblupo" + "/repos",
 		method: 'GET',
 		headers: {
 			"User-Agent": "EnableIssues",
