@@ -3,17 +3,18 @@ var fs = require("fs");
 var Promise = require('bluebird');
 var parse = require('parse-link-header');
 
-var token = "token " + "8d431c72417c7640f7ef8029e0920e5dc16ac89f";
+var token = "token " + "98d16589f1940fc28c1f72434cd9da8b0711c16b";
 
-var unityId = "cjparnin";
+var unityId = "cblupo";
 
-getYourRepos(unityId);
+// getYourRepos(unityId);
+listBranches(unityId,"hw1p2");
 
 function getYourRepos(userName)
 {
 
 	var options = {
-		url: 'https://github.ncsu.edu/api/v3/users/' + "cblupo" + "/repos",
+		url: 'https://github.ncsu.edu/api/v3/users/' + userName + "/repos",
 		method: 'GET',
 		headers: {
 			"User-Agent": "EnableIssues",
