@@ -7,15 +7,11 @@ var token = "token " + "98d16589f1940fc28c1f72434cd9da8b0711c16b";
 
 var unityId = "cblupo";
 
-// getYourRepos(unityId);
-// listBranches(unityId,"hw1p2");
-createRepo();
-
 function getYourRepos(userName)
 {
 
 	var options = {
-		url: 'https://github.ncsu.edu/api/v3/users/' + userName + "/repos",
+		url: 'https://github.ncsu.edu/api/v3/user/repos',
 		method: 'GET',
 		headers: {
 			"User-Agent": "EnableIssues",
@@ -38,12 +34,10 @@ function getYourRepos(userName)
 
 }
 
-// GET /repos/:owner/:repo/branches
-// 
 function listBranches(owner,repo)
 {
 	var options = {
-	url: 'https://github.ncsu.edu/api/v3/users/repos/' + owner + '/' + repo + '/branches',
+	url: 'https://github.ncsu.edu/api/v3/repos/' + owner + '/' + repo + '/branches',
 		method: 'GET',
 		headers: {
 			"User-Agent": "EnableIssues",
@@ -55,8 +49,6 @@ function listBranches(owner,repo)
 	// Send a http request to url and specify a callback that will be called upon its return.
 	request(options, function (error, response, body) 
 	{
-		console.log("my url:")
-		console.log( "   " + options.url);
 		var obj = JSON.parse(body);
 		console.log( obj );
 		for( var i = 0; i < obj.length; i++ )
@@ -70,7 +62,7 @@ function listBranches(owner,repo)
 // https://developer.github.com/v3/repos/#create
 function createRepo(repo) {
 	var options = {
-	url: 'https://github.ncsu.edu/api/v3/users/repos/',
+	url: 'https://github.ncsu.edu/api/v3/user/repos',
 		method: 'POST',
 		headers: {
 			"User-Agent": "EnableIssues",
@@ -87,12 +79,14 @@ function createRepo(repo) {
 			  "has_downloads": true
 		}
 	};
+	request(options, function (){});
+
 }
 
 // https://developer.github.com/v3/issues/#create-an-issue
 function createIssue(owner, repo) {
 	var options = {
-		url: 'https://github.ncsu.edu/api/v3/users/repos/' + owner + '/' + repo + '/issues',
+		url: 'https://github.ncsu.edu/api/v3/repos/' + owner + '/' + repo + '/issues',
 		method: 'POST',
 		headers: {
 			"User-Agent": "EnableIssues",
@@ -100,22 +94,16 @@ function createIssue(owner, repo) {
 			"Authorization": token
 		},
 		json: { 
-				"title": "Found a bug",
-				"body": "I'm having a problem with this.",
-				"assignee": "octocat",
-				"milestone": 1,
-				"labels": [
-							"Label1",
-							"Label2"
-						  ]
+				"title": "Found a bug"
 			  }
 	};	
+	request(options, function (){});
 }
 
 // https://developer.github.com/v3/repos/#edit
 function enableWiki(owner, repo) {
 	var options = {
-		url: 'https://github.ncsu.edu/api/v3/users/repos/' + owner + '/' + repo,
+		url: 'https://github.ncsu.edu/api/v3/repos/' + owner + '/' + repo,
 		method: 'PATCH',
 		headers: {
 			"User-Agent": "EnableIssues",
@@ -123,8 +111,9 @@ function enableWiki(owner, repo) {
 			"Authorization": token
 		},
 		json: { 
-				"title": repo,
+				"name": repo,
 				"has_wiki": true,
 			  }
 	};		
+	request(options, function (){});
 }
