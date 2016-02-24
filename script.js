@@ -7,6 +7,9 @@ var token = "token " + "98d16589f1940fc28c1f72434cd9da8b0711c16b";
 
 var unityId = "cblupo";
 
+createRepo(unityId, "asdf");
+addColaborator(unityId, "asdf", "syang16");
+
 function getYourRepos(userName)
 {
 
@@ -116,4 +119,19 @@ function enableWiki(owner, repo) {
 			  }
 	};		
 	request(options, function (){});
+}
+
+// https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
+// PUT /repos/:owner/:repo/collaborators/:username
+function addColaborator(owner, repo, colabname) {
+	var options = {
+		url: 'https://github.ncsu.edu/api/v3/repos/' + owner + '/' + repo + '/collaborators/' + colabname,
+		method: 'POST',
+		headers: {
+			"User-Agent": "EnableIssues",
+			"content-type": "application/json",
+			"Authorization": token
+		}
+	};		
+	request(options, function (){});	
 }
